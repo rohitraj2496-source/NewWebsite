@@ -263,6 +263,22 @@ footer a { color: var(--accent); text-decoration: none; }
 .chat-send:hover { box-shadow: 0 0 20px var(--accent-glow-strong); }
 .chat-send svg { width: 18px; height: 18px; fill: var(--bg-primary); }
 
+/* ─── BLOG SECTION ─── */
+.blog-section { padding: 80px 0; background: var(--bg-secondary); }
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+.blog-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.4s; display: flex; flex-direction: column; }
+.blog-card:hover { border-color: var(--border-accent); transform: translateY(-4px); }
+.blog-card-thumb { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; font-size: 48px; background: linear-gradient(135deg, rgba(0,229,160,0.08), rgba(0,100,229,0.06)); border-bottom: 1px solid var(--border); }
+.blog-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+.blog-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.blog-card-body h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.3px; line-height: 1.35; }
+.blog-card-body p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+.blog-read-more { font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.3s; }
+.blog-read-more:hover { gap: 10px; }
+.blog-cta-wrap { text-align: center; margin-top: 40px; }
+.btn-blog { padding: 14px 32px; background: transparent; color: var(--text-primary); border: 1px solid var(--border); border-radius: 10px; font-family: var(--font-display); font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn-blog:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
 /* ─── RESPONSIVE ─── */
 /* ─── RESPONSIVE: TABLET ─── */
 @media (max-width: 900px) {
@@ -282,6 +298,7 @@ footer a { color: var(--accent); text-decoration: none; }
   .stats-strip { flex-direction: column; }
   .chat-window { width: calc(100vw - 24px); right: 12px; bottom: 90px; }
   .pricing-features { flex-direction: column; align-items: center; gap: 12px; }
+  .blog-grid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ─── RESPONSIVE: MOBILE ─── */
@@ -394,6 +411,16 @@ footer a { color: var(--accent); text-decoration: none; }
   .chat-input-wrap input { padding: 10px 12px; font-size: 13px; }
   .chat-send { width: 38px; height: 38px; }
   .chat-send svg { width: 16px; height: 16px; }
+
+  /* Blog */
+  .blog-section { padding: 48px 0; }
+  .blog-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
+  .blog-card-thumb { height: 120px; font-size: 36px; }
+  .blog-card-body { padding: 20px; }
+  .blog-card-body h3 { font-size: 16px; }
+  .blog-card-body p { font-size: 13px; }
+  .blog-cta-wrap { margin-top: 28px; }
+  .btn-blog { width: 100%; justify-content: center; padding: 14px 24px; font-size: 14px; }
 }
 </style>
 </head>
@@ -409,6 +436,7 @@ footer a { color: var(--accent); text-decoration: none; }
     <a href="#why">Why</a>
     <a href="#compare">vs Agency</a>
     <a href="#pricing">Pricing</a>
+    <a href="blog.html">Blog</a>
     <a href="#contact" class="nav-cta">Get Started</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
@@ -426,7 +454,7 @@ footer a { color: var(--accent); text-decoration: none; }
       <h1>Your e-commerce<br>audit on <span class="highlight">autopilot.</span></h1>
       <p class="hero-subtitle">ConvertOS audits your entire e-commerce ecosystem autonomously — from AIPL funnel analysis to real-time CRO insights. Get the precision of a data science team at the speed of AI.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Get Demo →</a>
+        <a href="#contact" class="btn-primary">Start Audit →</a>
         <a href="#how" class="btn-secondary">See How It Works</a>
       </div>
     </div>
@@ -582,7 +610,7 @@ footer a { color: var(--accent); text-decoration: none; }
         <div class="pricing-feat"><span class="pf-check">✓</span> Revenue-ranked roadmap</div>
         <div class="pricing-feat"><span class="pf-check">✓</span> Cancel anytime</div>
       </div>
-      <a href="#contact" class="btn-primary">Get Demo →</a>
+      <a href="#contact" class="btn-primary">Start Audit →</a>
     </div>
   </div>
 </section>
@@ -610,7 +638,7 @@ footer a { color: var(--accent); text-decoration: none; }
           <div class="form-group"><label>Email Address</label><input type="email" id="cEmail" placeholder="jane@company.com" required></div>
           <div class="form-group"><label>Website URL</label><input type="url" id="cWebsite" placeholder="https://yourstore.com" required></div>
           <div class="form-group"><label>Message</label><textarea id="cMessage" placeholder="Tell us about your e-commerce setup and goals..."></textarea></div>
-          <button class="form-submit" onclick="submitForm()">Get Demo →</button>
+          <button class="form-submit" onclick="submitForm()">Start Audit →</button>
         </div>
         <div class="form-success" id="formSuccess">
           <div class="check-circle">✓</div>
@@ -618,6 +646,47 @@ footer a { color: var(--accent); text-decoration: none; }
           <p>We'll be in touch within 24 hours with your personalized walkthrough.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog-section" id="blog">
+  <div class="container">
+    <div class="section-label">From the blog</div>
+    <div class="section-title">Insights to help you<br>convert smarter.</div>
+    <p class="section-desc">Deep dives into CRO, AIPL funnels, and the future of autonomous e-commerce optimization.</p>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-card-thumb">📊</div>
+        <div class="blog-card-body">
+          <div class="blog-tag">CRO Strategy</div>
+          <h3>Why Most E-Commerce CRO Audits Fail (And How AI Fixes It)</h3>
+          <p>Traditional audits miss 60% of conversion leaks. Learn how autonomous agents uncover what human analysts can't — and why speed matters.</p>
+          <a href="blog.html" class="blog-read-more">Read more →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-thumb">🔍</div>
+        <div class="blog-card-body">
+          <div class="blog-tag">AIPL Framework</div>
+          <h3>The AIPL Funnel Explained: A B2B E-Commerce Guide</h3>
+          <p>Awareness, Interest, Purchase, Loyalty — the four stages that define your revenue pipeline. Here's how to map, measure, and optimize each one.</p>
+          <a href="blog.html" class="blog-read-more">Read more →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-thumb">⚡</div>
+        <div class="blog-card-body">
+          <div class="blog-tag">Industry Trends</div>
+          <h3>Agencies vs AI Agents: The Future of Conversion Optimization</h3>
+          <p>The CRO industry is shifting from retainer-based agencies to autonomous AI. We break down the economics, speed, and accuracy of both approaches.</p>
+          <a href="blog.html" class="blog-read-more">Read more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="blog-cta-wrap">
+      <a href="blog.html" class="btn-blog">Know More →</a>
     </div>
   </div>
 </section>
@@ -667,7 +736,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
 }, { threshold: 0.1 });
-document.querySelectorAll('.what-card, .how-step, .why-card, .vs-card, .pricing-inner').forEach(el => {
+document.querySelectorAll('.what-card, .how-step, .why-card, .vs-card, .pricing-inner, .blog-card').forEach(el => {
   el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'all 0.6s ease'; observer.observe(el);
 });
 
@@ -705,7 +774,7 @@ document.querySelectorAll('.what-card, .how-step, .why-card, .vs-card, .pricing-
 // 10. Paste that URL below replacing YOUR_GOOGLE_SCRIPT_URL
 // ──────────────────────────────────────────────────────
 
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxRUQhlMecgOSwxl6sfof9Ob8cp8f0YJg6Wc3-GuGBTv4258lodizLQMAvJHoscMTbLGA/exec';
+const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_SCRIPT_URL';
 
 async function submitForm() {
   const name = document.getElementById('cName').value.trim();
@@ -732,7 +801,7 @@ async function submitForm() {
     document.getElementById('formSuccess').style.display = 'block';
   } catch (err) {
     console.error('Submission error:', err);
-    btn.textContent = 'Get Demo →';
+    btn.textContent = 'Start Audit →';
     btn.disabled = false;
     btn.style.opacity = '1';
     alert('Something went wrong. Please try again or email us directly.');
