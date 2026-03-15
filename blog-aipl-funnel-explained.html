@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIPL Funnel Explained: How to Map Awareness → Interest → Purchase → Loyalty — ConvertOS Blog</title>
+<meta name="description" content="Understand the AIPL funnel framework — Awareness, Interest, Purchase, Loyalty — and learn how to map it for your B2B e-commerce brand.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg-primary:#07080C;--bg-secondary:#0D0F15;--bg-card:#11131A;--accent:#00E5A0;--accent-glow:rgba(0,229,160,0.15);--accent-glow-strong:rgba(0,229,160,0.3);--text-primary:#E8ECF1;--text-secondary:#8A93A6;--text-muted:#555E70;--border:rgba(255,255,255,0.06);--border-accent:rgba(0,229,160,0.2);--font-display:'Sora',sans-serif;--font-mono:'Space Mono',monospace}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-display);background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;line-height:1.65}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:var(--text-muted);border-radius:3px}
+.grid-bg{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px}
+.glow-blob{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;width:600px;height:600px;background:rgba(0,229,160,0.07);top:-200px;left:-200px}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,8,12,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--text-primary);text-decoration:none;letter-spacing:-0.5px}.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:36px;align-items:center}.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:14px;transition:color 0.3s}.nav-links a:hover{color:var(--text-primary)}.nav-links a.active{color:var(--accent)}
+.nav-cta{padding:10px 24px!important;background:var(--accent)!important;color:var(--bg-primary)!important;border-radius:8px;font-weight:600!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}.hamburger span{width:24px;height:2px;background:var(--text-primary);border-radius:1px}
+.container{max-width:800px;margin:0 auto;padding:0 32px}
+.back-link{display:inline-flex;align-items:center;gap:8px;color:var(--text-secondary);text-decoration:none;font-size:14px;transition:color 0.3s;padding-top:100px;margin-bottom:32px;position:relative;z-index:1}.back-link:hover{color:var(--accent)}
+.post-header{position:relative;z-index:1;margin-bottom:48px}
+.post-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}.post-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+.post-title{font-size:clamp(28px,4vw,42px);font-weight:700;line-height:1.2;letter-spacing:-1.5px;margin-bottom:16px}
+.post-meta{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:16px}.post-meta .dot{width:4px;height:4px;background:var(--text-muted);border-radius:50%}
+.post-hero-img{width:100%;height:280px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:80px;margin-bottom:48px;border:1px solid var(--border);position:relative;z-index:1}
+.thumb-1{background:linear-gradient(135deg,rgba(0,229,160,0.08),rgba(0,100,229,0.06))}.thumb-2{background:linear-gradient(135deg,rgba(255,189,46,0.08),rgba(255,95,87,0.06))}.thumb-3{background:linear-gradient(135deg,rgba(91,160,208,0.08),rgba(0,229,160,0.06))}.thumb-4{background:linear-gradient(135deg,rgba(255,95,87,0.08),rgba(255,189,46,0.06))}.thumb-5{background:linear-gradient(135deg,rgba(0,229,160,0.1),rgba(91,160,208,0.06))}.thumb-6{background:linear-gradient(135deg,rgba(91,160,208,0.1),rgba(255,189,46,0.06))}
+.post-content{position:relative;z-index:1;padding-bottom:80px}
+.post-content h2{font-size:24px;font-weight:600;margin:40px 0 16px;letter-spacing:-0.5px}.post-content h2:first-child{margin-top:0}
+.post-content h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:var(--accent)}
+.post-content p{font-size:16px;color:var(--text-secondary);line-height:1.8;margin-bottom:20px}
+.post-content ul{margin:0 0 20px 20px}.post-content li{font-size:15px;color:var(--text-secondary);line-height:1.8;margin-bottom:8px}
+.post-content blockquote{border-left:3px solid var(--accent);padding:16px 24px;margin:28px 0;background:var(--accent-glow);border-radius:0 12px 12px 0}.post-content blockquote p{color:var(--text-primary);font-size:16px;margin-bottom:0;font-style:italic}
+.highlight-box{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:28px 0}.highlight-box h4{font-size:16px;font-weight:600;margin-bottom:12px;color:var(--accent)}.highlight-box p{font-size:14px;margin-bottom:0}
+.post-cta{background:var(--bg-card);border:1px solid var(--border-accent);border-radius:16px;padding:40px;text-align:center;position:relative;z-index:1;margin-bottom:60px}.post-cta h3{font-size:22px;font-weight:600;margin-bottom:12px}.post-cta p{font-size:15px;color:var(--text-secondary);margin-bottom:24px}.post-cta a{padding:14px 32px;background:var(--accent);color:var(--bg-primary);border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s}.post-cta a:hover{box-shadow:0 0 40px var(--accent-glow-strong)}
+footer{border-top:1px solid var(--border);padding:48px 0;text-align:center;position:relative;z-index:1}footer p{font-size:13px;color:var(--text-muted)}footer a{color:var(--accent);text-decoration:none}
+@media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.nav-links.mobile-open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(7,8,12,0.97);padding:24px;gap:20px;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);z-index:999}.hamburger{display:flex}}
+@media(max-width:600px){.container{padding:0 18px}nav{padding:0 16px;height:64px}.nav-logo{font-size:17px}.nav-links.mobile-open{top:64px;padding:20px 18px}.nav-cta{padding:12px 20px!important;text-align:center;width:100%;display:block!important}.back-link{padding-top:80px;margin-bottom:24px;font-size:13px}.post-title{font-size:24px;letter-spacing:-1px}.post-hero-img{height:180px;font-size:56px;border-radius:12px;margin-bottom:32px}.post-content h2{font-size:20px;margin:32px 0 12px}.post-content h3{font-size:16px}.post-content p{font-size:15px}.post-content li{font-size:14px}.post-cta{padding:28px 20px}.post-cta h3{font-size:18px}.post-cta a{width:100%;justify-content:center}footer{padding:32px 0}footer p{font-size:12px}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+<a href="index.html" class="nav-logo">Convert<span>OS</span></a>
+<div class="nav-links" id="navLinks"><a href="index.html#what">What</a><a href="index.html#how">How It Works</a><a href="index.html#pricing">Pricing</a><a href="blog.html" class="active">Blog</a><a href="index.html#contact" class="nav-cta">Get Started</a></div>
+<button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></button>
+</nav>
+<div class="container">
+<div class="glow-blob"></div>
+<a href="blog.html" class="back-link">← Back to Blog</a>
+
+<div class="post-header">
+<div class="post-tag">Product-Led / CRO Education</div>
+<h1 class="post-title">AIPL Funnel Explained: How to Map Awareness → Interest → Purchase → Loyalty</h1>
+<div class="post-meta"><span>Apr 3, 2026</span><span class="dot"></span><span>8 min read</span></div>
+</div>
+<div class="post-hero-img thumb-2">🔍</div>
+<div class="post-content">
+
+    <h2>What Is the AIPL Funnel?</h2>
+    <h3>Origin &amp; Why It Fits E-Commerce</h3>
+    <p>If you've ever wondered why your traffic doesn't translate to revenue, the answer is almost always hiding somewhere in your funnel. But not all funnel frameworks are created equal. The AIPL model — Awareness, Interest, Purchase, Loyalty — was originally developed within Alibaba's e-commerce ecosystem and has since been adapted for global B2B commerce.</p>
+    <p>What makes AIPL uniquely powerful is that it treats post-purchase loyalty as an equal stage, not an afterthought. In B2B, where customer lifetime value dwarfs first-order value, this distinction is critical.</p>
+
+    <h3>AIPL vs. AIDA vs. Pirate Metrics (AARRR)</h3>
+    <p>AIDA (Attention, Interest, Desire, Action) stops at the purchase. Pirate Metrics (AARRR) is designed for SaaS, not commerce. AIPL bridges both worlds — it's purpose-built for e-commerce businesses that need to track the full journey from first impression to repeat buyer. The Loyalty stage captures reorder rates, referral behavior, and account expansion — metrics that matter most in B2B.</p>
+
+    <h2>Breaking Down Each Stage</h2>
+    <h3>Awareness — Are You Visible Where Buyers Search?</h3>
+    <p>The first stage measures whether your brand appears where B2B buyers are actively looking. This includes paid search, LinkedIn, industry publications, trade directories, and increasingly, AI search engines. Key metrics: impressions, reach quality, brand search volume, and share of voice in your category.</p>
+
+    <h3>Interest — Are Visitors Engaging or Bouncing?</h3>
+    <p>Once aware, prospects need a reason to stay. This stage covers landing page engagement, product catalog browsing, content consumption, and initial inquiries. The critical signal here is the gap between your acquisition messaging and on-site experience. If your ads promise one thing but your landing page delivers another, interest dies immediately.</p>
+
+    <blockquote><p>The gap between awareness and interest is where most B2B marketing budgets go to die.</p></blockquote>
+
+    <h3>Purchase — Is Your Checkout Converting or Leaking?</h3>
+    <p>The conversion stage. For B2B, this is more complex than B2C — involving quotes, approval workflows, procurement processes, and sometimes multi-stakeholder sign-offs. Optimizing this stage means reducing friction at every decision point: cart to checkout, payment selection, order confirmation. Key metrics: cart-to-purchase rate, checkout abandonment rate, and average order value.</p>
+
+    <h3>Loyalty — Are Buyers Coming Back?</h3>
+    <p>The most undervalued and highest-leverage stage. Loyalty encompasses reorder rates, account expansion, referrals, NPS scores, and customer lifetime value. In B2B, acquiring a new customer costs 5-7x more than retaining an existing one. Brands that optimize for loyalty see compounding returns that dwarf acquisition-only strategies.</p>
+
+    <div class="highlight-box">
+    <h4>Why AIPL Beats Traditional Funnels for E-Commerce</h4>
+    <p>Traditional funnels end at purchase. AIPL continues into loyalty, giving you a complete view of customer lifetime value. ConvertOS automatically maps your AIPL funnel, measures conversion rates between stages, and pinpoints exactly where prospects are leaking — all in under 5 minutes.</p>
+    </div>
+
+    <h2>How to Map Your Own AIPL Funnel</h2>
+    <p>Start by listing every touchpoint in your customer journey: ad impressions, landing pages, product pages, cart, checkout steps, order confirmation, follow-up emails, reorder prompts. Assign each to an AIPL stage. Then measure the conversion rate between each stage. The biggest drops reveal your biggest opportunities.</p>
+    <p>Or, connect ConvertOS and let it do this automatically — with revenue-impact projections for every optimization it recommends.</p>
+
+</div>
+<div class="post-cta">
+<h3>Ready to find your conversion leaks?</h3>
+<p>ConvertOS audits your entire e-commerce ecosystem in under 5 minutes. Starting at ₹15,999/month.</p>
+<a href="index.html#contact">Start Audit →</a>
+</div>
+</div>
+<footer><div class="container"><p>&copy; 2025 <a href="index.html">ConvertOS</a>. The autonomous CRO agent for B2B e-commerce.</p></div></footer>
+</body>
+</html>
