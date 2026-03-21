@@ -191,20 +191,6 @@ section { position: relative; z-index: 1; }
 .vs-price.red { color: var(--red); text-decoration: line-through; opacity: 0.6; }
 .vs-price.green { color: var(--accent); }
 
-/* ─── PRICING ─── */
-.pricing-banner { padding: 60px 0; text-align: center; position: relative; z-index: 1; }
-.pricing-inner { background: linear-gradient(135deg, rgba(0, 229, 160, 0.08), rgba(0, 184, 212, 0.06)); border: 1px solid var(--border-accent); border-radius: 24px; padding: 64px 40px; position: relative; overflow: hidden; }
-.pricing-inner::before { content: ''; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,229,160,0.1), transparent 70%); border-radius: 50%; }
-.pricing-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-.pricing-amount { font-size: clamp(48px, 6vw, 72px); font-weight: 700; letter-spacing: -3px; margin-bottom: 4px; }
-.pricing-amount .currency { font-size: 0.5em; vertical-align: super; color: var(--accent); }
-.pricing-amount .number { color: var(--text-primary); }
-.pricing-amount .per { font-size: 0.35em; color: var(--text-muted); font-weight: 400; letter-spacing: 0; }
-.pricing-note { font-size: 16px; color: var(--text-secondary); margin-bottom: 32px; }
-.pricing-features { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 36px; }
-.pricing-feat { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-secondary); }
-.pricing-feat .pf-check { color: var(--accent); font-weight: 700; }
-
 /* ─── CONTACT ─── */
 .contact-section { padding: 80px 0; }
 .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 40px; }
@@ -297,7 +283,6 @@ footer a { color: var(--accent); text-decoration: none; }
   .contact-wrapper { grid-template-columns: 1fr; }
   .stats-strip { flex-direction: column; }
   .chat-window { width: calc(100vw - 24px); right: 12px; bottom: 90px; }
-  .pricing-features { flex-direction: column; align-items: center; gap: 12px; }
   .blog-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -366,15 +351,6 @@ footer a { color: var(--accent); text-decoration: none; }
   .vs-price { font-size: 18px; }
   .vs-price-label { font-size: 10px; }
 
-  /* Pricing */
-  .pricing-banner { padding: 40px 0; }
-  .pricing-inner { padding: 40px 20px; border-radius: 18px; }
-  .pricing-eyebrow { font-size: 10px; letter-spacing: 2px; }
-  .pricing-amount { font-size: 42px; letter-spacing: -2px; }
-  .pricing-note { font-size: 14px; margin-bottom: 24px; }
-  .pricing-features { gap: 10px; margin-bottom: 28px; }
-  .pricing-feat { font-size: 13px; }
-  .pricing-inner .btn-primary { width: 100%; justify-content: center; }
 
   /* Contact */
   .contact-section { padding: 48px 0; }
@@ -435,7 +411,6 @@ footer a { color: var(--accent); text-decoration: none; }
     <a href="#how">How It Works</a>
     <a href="#why">Why</a>
     <a href="#compare">vs Agency</a>
-    <a href="#pricing">Pricing</a>
     <a href="blog.html">Blog</a>
     <a href="#contact" class="nav-cta">Get Started</a>
   </div>
@@ -565,10 +540,6 @@ footer a { color: var(--accent); text-decoration: none; }
             <li><span class="icon-x">✕</span> Need to manage account managers &amp; meetings</li>
           </ul>
         </div>
-        <div class="vs-bottom-bar agency-bar">
-          <span class="vs-price-label">Typical cost</span>
-          <span class="vs-price red">₹1,50,000+/mo</span>
-        </div>
       </div>
       <!-- ConvertOS -->
       <div class="vs-card" style="border-color: var(--border-accent);">
@@ -584,36 +555,11 @@ footer a { color: var(--accent); text-decoration: none; }
             <li><span class="icon-check">✓</span> Zero management overhead — fully autonomous</li>
           </ul>
         </div>
-        <div class="vs-bottom-bar convert-bar">
-          <span class="vs-price-label">Starting at</span>
-          <span class="vs-price green">₹15,999/mo</span>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="pricing-banner" id="pricing">
-  <div class="container">
-    <div class="glow-blob glow-3"></div>
-    <div class="pricing-inner">
-      <div class="pricing-eyebrow">Simple, transparent pricing</div>
-      <div class="pricing-amount">
-        <span class="currency">₹</span><span class="number">15,999</span><span class="per">/month</span>
-      </div>
-      <p class="pricing-note">Everything you need to optimize your e-commerce conversions. No hidden fees.</p>
-      <div class="pricing-features">
-        <div class="pricing-feat"><span class="pf-check">✓</span> Full AIPL funnel audit</div>
-        <div class="pricing-feat"><span class="pf-check">✓</span> Real-time CRO insights</div>
-        <div class="pricing-feat"><span class="pf-check">✓</span> 24/7 monitoring</div>
-        <div class="pricing-feat"><span class="pf-check">✓</span> Revenue-ranked roadmap</div>
-        <div class="pricing-feat"><span class="pf-check">✓</span> Cancel anytime</div>
-      </div>
-      <a href="#contact" class="btn-primary">Start Audit →</a>
-    </div>
-  </div>
-</section>
 
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
@@ -736,7 +682,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
 }, { threshold: 0.1 });
-document.querySelectorAll('.what-card, .how-step, .why-card, .vs-card, .pricing-inner, .blog-card').forEach(el => {
+document.querySelectorAll('.what-card, .how-step, .why-card, .vs-card, .blog-card').forEach(el => {
   el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'all 0.6s ease'; observer.observe(el);
 });
 
@@ -820,9 +766,9 @@ function getBotReply(input) {
   if (q.includes('how') || q.includes('audit') || q.includes('work'))
     return "It's simple: 1️⃣ Connect your store and analytics (one-click integrations). 2️⃣ ConvertOS autonomously scans your full funnel — awareness, interest, purchase, and loyalty stages. 3️⃣ You get a prioritized report with projected revenue impact for each fix. The whole process takes under 5 minutes.";
   if (q.includes('cost') || q.includes('price') || q.includes('pricing'))
-    return "Plans start at just ₹15,999/month — a fraction of what agencies charge (₹1.5L+/mo). You get full AIPL funnel audits, real-time CRO insights, 24/7 monitoring, and a revenue-ranked roadmap. No contracts, cancel anytime!";
+    return "We offer flexible plans based on your store's scale. The best way to get accurate pricing is to fill out the contact form below — our team will get back within 24 hours with a personalized quote!";
   if (q.includes('agency') || q.includes('different') || q.includes('better') || q.includes('compare'))
-    return "Unlike agencies, ConvertOS delivers your first audit in minutes (not weeks), monitors 24/7 (not monthly check-ins), and costs ₹15,999/mo vs ₹1.5L+ for agencies. Zero meetings, zero contracts, fully autonomous. Scroll to the 'vs Agency' section for the full breakdown!";
+    return "Unlike agencies, ConvertOS delivers your first audit in minutes (not weeks), monitors 24/7 (not monthly check-ins), and costs a fraction of traditional agencies. Plus, zero meetings, zero contracts, and fully autonomous operation.";
   if (q.includes('demo') || q.includes('trial') || q.includes('try'))
     return "We'd love to show you ConvertOS in action! Fill out the contact form below and our team will set up a personalized demo within 24 hours. We'll include a free initial scan of your store. 🚀";
   if (q.includes('integrat') || q.includes('connect') || q.includes('platform') || q.includes('shopify'))
