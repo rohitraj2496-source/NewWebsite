@@ -795,5 +795,11 @@ function sendQuick(text) {
   setTimeout(() => { removeTyping(); addMsg(getBotReply(text), 'bot'); }, 800 + Math.random() * 600);
 }
 </script>
+
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
