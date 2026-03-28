@@ -712,56 +712,32 @@ document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s)
 // FORM SUBMISSIONS — Web3Forms (email) + Google Sheets (database)
 // ──────────────────────────────────────────────────────
 
-const WEB3FORMS_KEY = '3bf96ebe-060f-45d9-ae4b-70588a5aadcd';
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyv2UIChDn3DeP8gOt286SmjZCEl4fD7rhHOyLlZVJlKFJYzIXOzF3bk89myuovgyfQ7Q/exec';
 
-async function submitForm() {
-  const name = document.getElementById('cName').value.trim();
-  const email = document.getElementById('cEmail').value.trim();
-  const website = document.getElementById('cWebsite').value.trim();
-  const message = document.getElementById('cMessage').value.trim();
+function submitForm() {
+  var name = document.getElementById('cName').value.trim();
+  var email = document.getElementById('cEmail').value.trim();
+  var website = document.getElementById('cWebsite').value.trim();
+  var message = document.getElementById('cMessage').value.trim();
   if (!name || !email || !website) { alert('Please fill in at least your name, email, and website.'); return; }
 
-  const btn = document.querySelector('.form-submit');
+  var btn = document.querySelector('.form-submit');
   btn.textContent = 'Submitting...';
   btn.disabled = true;
   btn.style.opacity = '0.7';
 
-  const formData = { name, email, website, message: message || '(No message provided)' };
+  // Send to Google Sheets
+  fetch(GOOGLE_SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, email: email, website: website, message: message || '(No message)' })
+  });
 
-  try {
-    // Send to Google Sheets (always works with no-cors)
-    fetch(GOOGLE_SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    }).catch(function() {});
-
-    // Send to Web3Forms (email notification)
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        subject: 'New ConvertOS Lead — ' + name,
-        from_name: 'ConvertOS Website',
-        ...formData
-      })
-    }).catch(function() {});
-
-    // Show success immediately — data is sent to both services
-    document.getElementById('contactFormFields').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-    // GA4: Track form submission
-    if (typeof gtag === 'function') gtag('event', 'form_submit', { event_category: 'lead', event_label: website });
-
-  } catch (err) {
-    console.error('Submission error:', err);
-    // Still show success — the requests were fired
-    document.getElementById('contactFormFields').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  }
+  // Show thank you message immediately
+  document.getElementById('contactFormFields').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+  if (typeof gtag === 'function') gtag('event', 'form_submit', { event_category: 'lead', event_label: website });
 }
 
 function toggleChat() { document.getElementById('chatWindow').classList.toggle('open'); document.getElementById('chatToggle').classList.toggle('open'); if (typeof gtag === 'function') gtag('event', 'chatbot_open', { event_category: 'engagement' }); }
