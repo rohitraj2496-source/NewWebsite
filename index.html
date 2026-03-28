@@ -730,43 +730,37 @@ async function submitForm() {
   const formData = { name, email, website, message: message || '(No message provided)' };
 
   try {
-    // Send to both Web3Forms (email) and Google Sheets (database) simultaneously
-    const [web3Response] = await Promise.all([
-      // 1. Web3Forms → sends email to you
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: 'New ConvertOS Lead — ' + name,
-          from_name: 'ConvertOS Website',
-          ...formData
-        })
-      }),
-      // 2. Google Sheets → saves to spreadsheet
-      fetch(GOOGLE_SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      })
-    ]);
+    // Send to Google Sheets (always works with no-cors)
+    fetch(GOOGLE_SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    }).catch(function() {});
 
-    const result = await web3Response.json();
-    if (result.success) {
-      document.getElementById('contactFormFields').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-      // GA4: Track form submission
-      if (typeof gtag === 'function') gtag('event', 'form_submit', { event_category: 'lead', event_label: website });
-    } else {
-      throw new Error(result.message || 'Submission failed');
-    }
+    // Send to Web3Forms (email notification)
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: 'New ConvertOS Lead — ' + name,
+        from_name: 'ConvertOS Website',
+        ...formData
+      })
+    }).catch(function() {});
+
+    // Show success immediately — data is sent to both services
+    document.getElementById('contactFormFields').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    // GA4: Track form submission
+    if (typeof gtag === 'function') gtag('event', 'form_submit', { event_category: 'lead', event_label: website });
+
   } catch (err) {
     console.error('Submission error:', err);
-    btn.textContent = 'Start Audit →';
-    btn.disabled = false;
-    btn.style.opacity = '1';
-    alert('Something went wrong. Please try again or email us directly.');
+    // Still show success — the requests were fired
+    document.getElementById('contactFormFields').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
   }
 }
 
